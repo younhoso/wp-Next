@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextResponse } from "next/server";
 
 const API_URL = process.env.WORDPRESS_API_URL!;
 
@@ -44,7 +44,7 @@ export async function getPreviewPost(id: string | string[] | undefined, idType =
   return data.post;
 }
 
-export async function getAllPostsWithSlug() {
+export async function GET() {
   const data = await fetchAPI(`
     query AllPosts {
       posts(first: 20, where: { orderby: { field: DATE, order: DESC } }) {
@@ -60,5 +60,5 @@ export async function getAllPostsWithSlug() {
     }
   `)
 
-  return data.posts
+  return NextResponse.json(data.posts)
 }

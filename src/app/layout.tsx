@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { pretendard } from '../libs/fonts';
 import type { Metadata, Viewport } from 'next';
 import CustomThemeProvider from '@/provider/CustomThemeProvider';
+import SWRConfigProvider from '@/provider/SWRConfigProvider';
 
 const metaTitle = 'wordpress | next';
 
@@ -35,7 +36,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ko">
       <body className={pretendard.className}>
         <CustomThemeProvider>
-          {children}
+          <SWRConfigProvider>
+            {children}
+          </SWRConfigProvider>
         </CustomThemeProvider>
       </body>
     </html>

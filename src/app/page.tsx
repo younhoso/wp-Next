@@ -1,18 +1,38 @@
-import {getAllPostsWithSlug} from '@/pages/api/main'
+'use client';
+import useSWR from 'swr';
 
-export default async function HomePage() {
-  const data = await getAllPostsWithSlug();
-  console.log(data.edges[0].node)
+type PostNode = {
+  title: string;
+  excerpt: string;
+  slug: string;
+  date: string;
+}
 
-  // const {edges} = allPosts;
-  // const heroPost = edges[0]?.node;
-  // const morePosts = edges.slice(1);
-  // console.log('heroPost:', heroPost)
-  // console.log('morePosts:', morePosts)
+type Edge = {
+  node: PostNode;
+}
+
+type PostData = {
+  edges: Edge[];
+}
+
+export default function HomePage() {
+  
+  const {data: naminData, isLoading: loading, error} = useSWR<PostData>('/api/main');
+  
+  if(loading || !naminData) return;
+  
+  const {edges} = naminData;
+  const heroPost = edges[0]?.node;
+  console.log('heroPost:', heroPost)
 
   return (
     <>
-      HomePage Main
+      <div>
+        <p>{heroPost.title}</p>
+        <p>{heroPost.excerpt}</p>
+        <p>{heroPost.date}</p>
+      </div>
     </>
   );
 }
