@@ -20,7 +20,7 @@ export type HeaderProps = {
 export default function Header({ category }: HeaderProps) {
   return (
     <HeaderStyled className={clsx("Header")}>
-      <Image src={logo} alt={"OMTLabs-LOGO"} />
+      {/* <Image src={logo} alt={"OMTLabs-LOGO"} /> */}
       <ul>
         {category?.map((item) => {
           return (
