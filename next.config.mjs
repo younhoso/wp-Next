@@ -6,7 +6,7 @@ if (!URL.canParse(process.env.WORDPRESS_API_URL)) {
 }
 
 const { protocol, hostname, port, pathname } = new URL(
-  process.env.WORDPRESS_API_URL,
+  process.env.WORDPRESS_API_URL
 );
 
 /** @type {import('next').NextConfig} */
@@ -15,7 +15,7 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ['1.gravatar.com'],
+    domains: ["1.gravatar.com"],
     remotePatterns: [
       {
         protocol: protocol.slice(0, -1),
