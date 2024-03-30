@@ -15,7 +15,7 @@ async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
   }
 
   // WPGraphQL 플러그인을 활성화
-  const res = await fetchPonyfill().fetch(`${API_URL}.local/graphql`, {
+  const res = await fetchPonyfill().fetch(API_URL, {
     headers,
     method: "POST",
     body: JSON.stringify({
