@@ -1,3 +1,4 @@
+import fetchPonyfill from "fetch-ponyfill";
 import { NextResponse } from "next/server";
 
 const API_URL = process.env.WORDPRESS_API_URL!;
@@ -14,7 +15,7 @@ async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
   }
 
   // WPGraphQL 플러그인을 활성화
-  const res = await fetch(API_URL, {
+  const res = await fetchPonyfill().fetch(API_URL, {
     headers,
     method: "POST",
     body: JSON.stringify({
