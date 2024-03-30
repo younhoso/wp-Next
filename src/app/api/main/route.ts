@@ -3,13 +3,17 @@ import { NextResponse } from "next/server";
 const API_URL = process.env.WORDPRESS_API_URL!;
 
 async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
-  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
 
   if (process.env.WORDPRESS_AUTH_REFRESH_TOKEN) {
-    headers["Authorization"] = `Bearer ${process.env.WORDPRESS_AUTH_REFRESH_TOKEN}`;
+    headers[
+      "Authorization"
+    ] = `Bearer ${process.env.WORDPRESS_AUTH_REFRESH_TOKEN}`;
   }
 
-  // WPGraphQL Plugin must be enabled
+  // WPGraphQL 플러그인을 활성화
   const res = await fetch(API_URL, {
     headers,
     method: "POST",
@@ -27,22 +31,25 @@ async function fetchAPI(query = "", { variables }: Record<string, any> = {}) {
   return json.data;
 }
 
-export async function getPreviewPost(id: string | string[] | undefined, idType = "DATABASE_ID") {
-  const data = await fetchAPI(
-    `
-    query PreviewPost($id: ID!, $idType: PostIdType!) {
-      post(id: $id, idType: $idType) {
-        databaseId
-        slug
-        status
-      }
-    }`,
-    {
-      variables: { id, idType },
-    },
-  );
-  return data.post;
-}
+// export async function getPreviewPost(
+//   id: string | string[] | undefined,
+//   idType = "DATABASE_ID"
+// ) {
+//   const data = await fetchAPI(
+//     `
+//     query PreviewPost($id: ID!, $idType: PostIdType!) {
+//       post(id: $id, idType: $idType) {
+//         databaseId
+//         slug
+//         status
+//       }
+//     }`,
+//     {
+//       variables: { id, idType },
+//     }
+//   );
+//   return data.post;
+// }
 
 export async function GET() {
   const data = await fetchAPI(`
@@ -58,7 +65,7 @@ export async function GET() {
         }
       }
     }
-  `)
+  `);
 
-  return NextResponse.json(data.posts)
+  return NextResponse.json(data.posts);
 }

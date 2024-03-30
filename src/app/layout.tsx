@@ -1,31 +1,33 @@
-import type { ReactNode } from 'react';
-import { pretendard } from '../libs/fonts';
-import type { Metadata, Viewport } from 'next';
-import CustomThemeProvider from '@/provider/CustomThemeProvider';
-import SWRConfigProvider from '@/provider/SWRConfigProvider';
+import type { ReactNode } from "react";
+import { pretendard } from "../libs/fonts";
+import type { Metadata, Viewport } from "next";
+import CustomThemeProvider from "@/provider/CustomThemeProvider";
+import SWRConfigProvider from "@/provider/SWRConfigProvider";
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
 
-const metaTitle = 'wordpress | next';
+const metaTitle = "wordpress | Next";
 
 export const metadata: Metadata = {
   title: {
-    template: metaTitle + ' | %s',
+    template: metaTitle + " | %s",
     default: metaTitle,
   },
-  description: '뭘 먹어도 맛있는 BBQ가 만든 BBQ몰!',
+  description: "wordpress | Next TEST",
   icons: {
-    icon: [{ url: '/favicon.ico', rel: 'shortcut icon' }],
+    icon: [{ url: "/favicon.ico", rel: "shortcut icon" }],
   },
   robots: {
     index: true,
     follow: true,
   },
   other: {
-    'naver-site-verification': '3d3e995da88e72e6',
+    "naver-site-verification": "3d3e995da88e72e6",
   },
-}
+};
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
@@ -36,9 +38,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="ko">
       <body className={pretendard.className}>
         <CustomThemeProvider>
-          <SWRConfigProvider>
-            {children}
-          </SWRConfigProvider>
+          <Header />
+          <SWRConfigProvider>{children}</SWRConfigProvider>
+          <Footer />
         </CustomThemeProvider>
       </body>
     </html>
