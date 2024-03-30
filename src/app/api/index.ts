@@ -1,4 +1,3 @@
-import fetchPonyfill from "fetch-ponyfill";
 const API_URL = process.env.WORDPRESS_API_URL!;
 
 export async function fetchAPI(
@@ -16,7 +15,7 @@ export async function fetchAPI(
   }
 
   // WPGraphQL 플러그인을 활성화
-  const res = await fetchPonyfill().fetch(API_URL, {
+  const res = await fetch(API_URL, {
     headers,
     method: "POST",
     body: JSON.stringify({
